@@ -1,0 +1,16 @@
+services:
+  postgres: # Это имя регстрируется Docker Compose, как название хоста, к которому обращается приложение.
+    image: 'postgres:latest'
+    container_name: postgres
+    environment:
+      - 'POSTGRES_DB=jwtdemo'
+      - 'POSTGRES_PASSWORD=809765'
+    ports:
+      - "5432:5432"
+  jwt-service:
+    build: .
+    container_name: jwt
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
